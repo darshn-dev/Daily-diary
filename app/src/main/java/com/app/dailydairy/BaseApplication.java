@@ -1,5 +1,11 @@
 package com.app.dailydairy;
 
+
+
+
+
+
+
 import com.app.dailydairy.di.DaggerAppComponent;
 
 import dagger.android.AndroidInjector;
@@ -9,6 +15,9 @@ public class BaseApplication  extends DaggerApplication {
 
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerAppComponent.builder().application(this).build();
+    return DaggerAppComponent.builder().application(this).build();
+//        return null;
+
+
     }
 }
