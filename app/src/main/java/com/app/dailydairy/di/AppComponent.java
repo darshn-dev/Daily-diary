@@ -3,6 +3,7 @@ package com.app.dailydairy.di;
 import android.app.Application;
 
 import com.app.dailydairy.BaseApplication;
+import com.app.dailydairy.SessionManager;
 
 import javax.inject.Singleton;
 
@@ -15,16 +16,15 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {AndroidSupportInjectionModule.class,
         ActivityBuilderModule.class,
         AppModule.class,
-    ViewModelFactoryModule.class})
+         ViewModelFactoryModule.class})
 
 public interface AppComponent extends AndroidInjector<BaseApplication> {
 
+    SessionManager sessionManager();
     @Component.Builder
     interface Builder{
-
         @BindsInstance
         Builder application(Application application);
-
         AppComponent build();
     }
 }

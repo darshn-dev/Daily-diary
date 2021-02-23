@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.app.dailydairy.R;
 import com.app.dailydairy.models.User;
+import com.app.dailydairy.ui.main.MainActivity;
 import com.app.dailydairy.viewmodel.ViewModelProviderFactory;
 import com.bumptech.glide.RequestManager;
 
@@ -63,7 +65,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     }
 
     private void subscribe(){
-        authViewModel.observeUser().observe(this, new Observer<AuthResource<User>>() {
+        authViewModel.observeAuthState().observe(this, new Observer<AuthResource<User>>() {
             @Override
             public void onChanged(AuthResource<User> userAuthResource) {
                 if(userAuthResource!=null){
@@ -72,10 +74,12 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                             Toast.makeText(AuthActivity.this,userAuthResource.message,Toast.LENGTH_LONG).show(); break;
 
                         case LOADING: showProgress(true); break;
-                        case AUTHENTICATED:
-                            Log.d(TAG, "onChanged: success "+userAuthResource.data.getUsername()); showProgress(false);
-
-                        break;
+                        case AUTHENTICATED: {
+                            Log.d(TAG, "onChanged: success " + userAuthResource.data.getUsername());
+                            showProgress(false);
+                            onLoginSucess();
+                            break;
+                        }
                         case NOT_AUTHENTICATED: showProgress(false); break;
                     }
                 }
@@ -83,6 +87,12 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
         });
     }
 
+
+    private void onLoginSucess(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private void showProgress(boolean isVisible){
 
