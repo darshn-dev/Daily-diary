@@ -7,14 +7,14 @@
     >
 
     <fragment android:id="@+id/post"
-        android:name="com.app.dailydairy.ui.main.post.PostFragment"
+        android:name="com.app.dailydiary.ui.main.post.PostFragment"
         android:label="@string/post"
         tools:layout="@layout/fragment_post"
 
         ></fragment>
 
     <fragment android:id="@id/profile"
-        android:name="com.app.dailydairy.ui.main.profile.ProfileFragment"
+        android:name="com.app.dailydiary.ui.main.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile"
         ></fragment>
